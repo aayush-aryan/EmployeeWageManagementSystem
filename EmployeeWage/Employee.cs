@@ -26,33 +26,43 @@ namespace EmployeeWage
             return empCheck;
         }
 
+        public static int GetWorkingHours(int randamValue)
+        {
+            int empHrs = 0;
+
+            switch (randamValue)
+            {
+                case IS_FULL_TIME:
+                    empHrs = 8;
+                    break;
+                case IS_PART_TIME:
+                    empHrs = 4;
+                    break;
+                default:
+                    empHrs = 0;
+                    break;
+            }
+            return empHrs;
+        }
+
         public static void CalculatingTotalMonthlyWages()
         {
-
-            while (totalEmpHrs <= Max_Hrs_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS)
+            int monthlySalary = 0;
+            while (totalEmpHrs < Max_Hrs_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS)
             {
                 totalWorkingDays++;
-                empCheck = Employee.RandomIntegerGenerator(0, 3);
-
-                switch (empCheck)
-                {
-                    case IS_FULL_TIME:
-                        empHrs = 8;
-                        break;
-                    case IS_PART_TIME:
-                        empHrs = 4;
-                        break;
-                    default:
-                        empHrs = 0;
-                        break;
-                }
+                empCheck = RandomIntegerGenerator(0, 3);
+                empHrs = GetWorkingHours(empCheck);
                 totalEmpHrs = totalEmpHrs + empHrs;
-                Console.WriteLine("Day# :" + totalWorkingDays + "EmpHrs :" + empHrs);
-
+                if (totalEmpHrs > Max_Hrs_IN_MONTH) 
+                {
+                    totalEmpHrs = totalEmpHrs - empHrs;
+                }
+                
             }
-            int totalEmpWages = totalEmpHrs * EMP_RATE_PER_HOUR;
-            Console.WriteLine("totalEmpWages :" + totalEmpWages);
-
+            monthlySalary = EMP_RATE_PER_HOUR * totalEmpHrs;
+            Console.WriteLine("totalSalary of employee in month " + monthlySalary);
         }
+
     }
 }
