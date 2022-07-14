@@ -10,11 +10,14 @@ namespace EmployeeWage
         public const int IS_PART_TIME = 2;
         public const int EMP_RATE_PER_HOUR = 20;
         public const int NUM_OF_WORKING_DAYS = 20;
+        public const int Max_Hrs_IN_MONTH = 100;
 
         public static int empCheck;
         public static int empHrs = 0;
         public static int empWage = 0;
         public static int totalEmpWages = 0;
+        public static int totalEmpHrs = 0;
+        public static int totalWorkingDays = 0;
 
         public static int RandomIntegerGenerator(int minRange, int maxRange)
         {
@@ -23,12 +26,14 @@ namespace EmployeeWage
             return empCheck;
         }
 
-        public static void CalculatingMonthlyWages()
+        public static void CalculatingTotalMonthlyWages()
         {
 
-            for (int day = 1; day <= NUM_OF_WORKING_DAYS; day++)
+            while (totalEmpHrs <= Max_Hrs_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS)
             {
+                totalWorkingDays++;
                 empCheck = Employee.RandomIntegerGenerator(0, 3);
+
                 switch (empCheck)
                 {
                     case IS_FULL_TIME:
@@ -41,12 +46,13 @@ namespace EmployeeWage
                         empHrs = 0;
                         break;
                 }
-                empWage = empHrs * EMP_RATE_PER_HOUR;
-                totalEmpWages += empWage;
-                Console.WriteLine("Employee Daily Wages day" + day + ":" + empWage);
-            }
-            Console.WriteLine("Employee Monthly Wages :" + totalEmpWages);
-        }
+                totalEmpHrs = totalEmpHrs + empHrs;
+                Console.WriteLine("Day# :" + totalWorkingDays + "EmpHrs :" + empHrs);
 
+            }
+            int totalEmpWages = totalEmpHrs * EMP_RATE_PER_HOUR;
+            Console.WriteLine("totalEmpWages :" + totalEmpWages);
+
+        }
     }
 }
