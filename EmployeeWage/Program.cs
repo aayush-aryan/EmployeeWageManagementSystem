@@ -8,8 +8,7 @@ namespace EmployeeWage
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome To EmployeeWage Management System ");
-            Employee.CalculatingDailyWages();
-           
+            Employee.AddingPartTimeEmployeeWages();
         }
     }
 }
