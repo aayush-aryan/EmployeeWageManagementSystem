@@ -22,29 +22,29 @@ namespace EmployeeWage
             return empCheck;
         }
 
-        public static void AddingPartTimeEmployeeWages()
+        public static void AddingPartTimeEmployeeWagesUsingSwitchCase()
         {
-            empCheck = Employee.RandomIntegerGenerator(0, 3);
-            if (empCheck == IS_FULL_TIME)
+            
+            empCheck = Employee.RandomIntegerGenerator(0,3);
+            switch (empCheck)
             {
-                empHrs = 8;
-                Console.WriteLine("Employee is Full Time");
-            }
-            else if (empCheck == IS_PART_TIME)
-            {
-                empHrs = 4;
-                Console.WriteLine("Employee is Part Time");
-            }
-            else
-            {
-                empHrs = 0;
-                Console.WriteLine("Employee is absent");
+                case IS_FULL_TIME:
+                    empHrs = 8;
+                    Console.WriteLine("Employee is Full Time");
+                    break;
+                case IS_PART_TIME:
+                    empHrs = 4;
+                    Console.WriteLine("Employee is Part Time");
+                    break;
+                default:
+                    empHrs = 0;
+                    Console.WriteLine("Employee is absent");
+                    break;
             }
 
             empWage = empHrs * EMP_RATE_PER_HOUR;
             Console.WriteLine("Employee Daily Wages :" + empWage);
         }
-
     }
 
 }
